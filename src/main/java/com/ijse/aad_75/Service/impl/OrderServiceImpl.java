@@ -92,6 +92,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public GetOrderDTO getOrderDetails(long orderId) {
+        //DTO eka OrderDTO nemei ganne GetOrderDTO mokada apata Customer Details wenama ganna awashya wena nisa
+        // customize DTO ekak select karanna wenawa - GetOrderDTO
         log.info("Execute method getOrderDetails()");
         try{
 
@@ -106,8 +108,10 @@ public class OrderServiceImpl implements OrderService {
             responseDTO.setOrderDate(order.getOrderDate());
             responseDTO.setTotal(order.getTotal());
 
+            //findById kiyala gaththa Order Object eke Save wela thiyena customerwa aragannawa
             Customer customer = order.getCustomer();
 
+            //response ekee e customerta adaala details send karanna
             responseDTO.setCustomerId(customer.getCustomerId());
             responseDTO.setCustomerName(customer.getCustomerName());
 

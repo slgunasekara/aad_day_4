@@ -41,13 +41,18 @@ public class StudentServiceImpl implements StudentService {
             student.setStudentLastName(studentDTO.getStudentLastName());
             student.setContact(studentDTO.getContact());
 
+            //front end eken ewana school id eka optional ekak widihata pass karanawa findByID eken aragen
             Optional<School> optionalSchool = schoolRepository.findById(studentDTO.getSchoolId());
+
             if(optionalSchool.isEmpty())
                 throw new RuntimeException("Sorry, related school is not found.");
 
+            //optional school eka aragannawa
             School school = optionalSchool.get();
 
+            //e aragaththa optional school eka student ta set karanawa
             student.setSchool(school);
+            //setup karapu studentwa save karanawa database ekata
             studentRepository.save(student);
 
         }catch (Exception e){
