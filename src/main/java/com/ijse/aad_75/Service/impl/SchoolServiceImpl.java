@@ -69,4 +69,5 @@ public class SchoolServiceImpl implements SchoolService {
             throw e;
         }
     }
+
 }

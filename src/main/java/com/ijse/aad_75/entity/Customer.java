@@ -18,6 +18,8 @@ public class Customer {
     private String customerName;
     private String contact;
 
+
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Order> orderList;
+    //mappedBy = Relation eka handle karana paththa (Foreign key eka enne kohetada)
 }

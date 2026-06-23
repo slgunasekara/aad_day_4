@@ -3,6 +3,7 @@ package com.ijse.aad_75.Controller;
 import com.ijse.aad_75.Service.StudentService;
 import com.ijse.aad_75.constant.CommonResponse;
 import com.ijse.aad_75.dto.StudentDTO;
+import com.ijse.aad_75.dto.response.GetStudentDTO;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,7 @@ public class StudentController {
 
     @GetMapping(value = "/{studentId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CommonResponse getStudentDetails(@PathVariable long studentId){
-        return new CommonResponse(OPERATION_SUCCESS,
-                studentService.getStudentDetails(studentId),SUCCESS);
+        GetStudentDTO studentDetails = studentService.getStudentDetails(studentId);
+        return new CommonResponse(OPERATION_SUCCESS,studentDetails,SUCCESS);
     }
 }

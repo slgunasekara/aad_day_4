@@ -37,14 +37,24 @@ public class OrderServiceImpl implements OrderService {
             Order order = new Order();
             order.setOrderDate(orderDTO.getOrderDate());
             order.setTotal(orderDTO.getTotal());
+            //////////////////
+        //how to get customer id
+            //get Customer Repo , so create customer repo eka dependancie injection ekak widihata inject karaganna
+            //Front end eken customer id eka ewanawa, eke uniq record eka ganne findById() eken
+            //optional data type eka thamai findById() eke data type eka ,
+            // mokada id ekak thiyennath puluwan nathi wennath puluwan
 
             Optional<Customer> optionalCustomer = customerRepository.findById(orderDTO.getCustomerId());
             if(optionalCustomer.isEmpty())
                 throw new RuntimeException("Sorry, related customer is not found.");
 
+            //ehema id ekak innawanam customer ta denna
             Customer customer = optionalCustomer.get();
 
+            //order ekata customer wa daanawa
             order.setCustomer(customer);
+
+            //////////////////
 
             orderRepository.save(order);
 
@@ -64,8 +74,10 @@ public class OrderServiceImpl implements OrderService {
             List<Order> orders = orderRepository.filterOrders(orderDate);
 
             for(Order order : orders){
-                OrderDTO dto = new OrderDTO(order.getOrderId(),
-                        order.getTotal(), order.getOrderDate());
+                OrderDTO dto = new OrderDTO(
+                        order.getOrderId(),
+                        order.getTotal(),
+                        order.getOrderDate());
 
                 responseList.add(dto);
             }

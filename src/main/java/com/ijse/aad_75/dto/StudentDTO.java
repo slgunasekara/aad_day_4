@@ -22,4 +22,5 @@ public class StudentDTO {
         this.studentLastName = studentLastName;
         this.contact = contact;
     }
+
 }

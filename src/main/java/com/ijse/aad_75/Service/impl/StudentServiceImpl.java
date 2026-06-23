@@ -4,6 +4,7 @@ import com.ijse.aad_75.Repository.SchoolRepository;
 import com.ijse.aad_75.Repository.StudentRepository;
 import com.ijse.aad_75.Service.StudentService;
 import com.ijse.aad_75.dto.StudentDTO;
+import com.ijse.aad_75.dto.response.GetStudentDTO;
 import com.ijse.aad_75.entity.School;
 import com.ijse.aad_75.entity.Student;
 import lombok.RequiredArgsConstructor;
@@ -83,23 +84,27 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO getStudentDetails(long studentId) {
+    public GetStudentDTO getStudentDetails(long studentId) {
         log.info("Execute method getStudentDetails() studentId:{}",studentId);
         try{
             Optional<Student> optionalStudent = studentRepository.findById(studentId);
             if(optionalStudent.isEmpty())
                 throw new RuntimeException("Sorry, related student is not found.");
 
+
             Student student = optionalStudent.get();
-//            StudentDTO studentDTO = new StudentDTO();
-//            studentDTO.setStudentId(student.getStudentId());
-//            studentDTO.setStudentFirstName(student.getStudentFirstName());
-//            studentDTO.setStudentLastName(student.getStudentLastName());
-//            studentDTO.setContact(student.getContact());
-//            return studentDTO;
-            return new StudentDTO(student.getStudentId(),
-                    student.getStudentFirstName(),student.getStudentLastName(),
-                    student.getContact());
+
+            GetStudentDTO responseDTO = new GetStudentDTO();
+            responseDTO.setStudentId(student.getStudentId());
+            responseDTO.setStudentFirstName(student.getStudentFirstName());
+            responseDTO.setStudentLastName(student.getStudentLastName());
+            responseDTO.setContact(student.getContact());
+
+            School school = student.getSchool();
+
+            responseDTO.setSchoolId(school.getSchoolId());
+            responseDTO.setSchoolName(school.getSchoolName());
+            return responseDTO;
 
 
         } catch (Exception e){

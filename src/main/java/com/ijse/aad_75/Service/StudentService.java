@@ -1,6 +1,7 @@
 package com.ijse.aad_75.Service;
 
 import com.ijse.aad_75.dto.StudentDTO;
+import com.ijse.aad_75.dto.response.GetStudentDTO;
 
 import java.util.List;
 
@@ -10,5 +11,5 @@ public interface StudentService {
 
     List<StudentDTO> getAllStudents();
 
-    StudentDTO getStudentDetails(long studentId);
+    GetStudentDTO getStudentDetails(long studentId);
 }

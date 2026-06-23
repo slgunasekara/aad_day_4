@@ -22,4 +22,5 @@ public class OrderDTO {
         this.total = total;
         this.orderDate = orderDate;
     }
+
 }
